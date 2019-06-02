@@ -23,41 +23,57 @@ const displayBooks = data => {
       const image = document.createElement(`img`);
       image.className = `thumbnail`;
       image.src = b.image;
+      const dialog = document.getElementById(`books-dialog`);
+      image.addEventListener(`click`, () => {
+        if (typeof dialog.showModal === "function") {
+          handleDialog(b);
+        } else {
+          alert("The dialog API is not supported by this browser");
+        }
+      });
       book.appendChild(image);
-    }
-
-    if (b.title) {
-      const title = document.createElement(`h3`);
-      title.className = `title`;
-      title.textContent = b.title;
-      book.appendChild(title);
-    }
-
-    if (b.authors) {
-      const authors = document.createElement(`h5`);
-      authors.className = `authors`;
-      const authorsText = b.authors.join(`, `);
-      authors.textContent = authorsText;
-      book.appendChild(authors);
-    }
-
-    if (b.date) {
-      const date = document.createElement(`h5`);
-      date.className = `date`;
-      date.textContent = b.date;
-      book.appendChild(date);
-    }
-
-    if (b.description) {
-      const description = document.createElement(`p`);
-      description.className = `description`;
-      description.textContent = b.description;
-      book.appendChild(description);
     }
 
     results.appendChild(book);
   });
 };
+
+const handleDialog = book => {
+  const dialog = document.getElementById(`books-dialog`);
+  const title = document.getElementById(`title`);
+  const authors = document.getElementById(`authors`);
+  const date = document.getElementById(`date`);
+  const description = document.getElementById(`description`);
+
+  title.textContent = ``;
+  authors.textContent = ``;
+  date.textContent = ``;
+  date.textContent = ``;
+
+  if (book.title) {
+    title.textContent = book.title;
+  }
+
+  if (book.authors) {
+    const authorsText = book.authors.join(`, `);
+    authors.textContent = authorsText;
+  }
+
+  if (book.date) {
+    date.textContent = book.date;
+  }
+
+  if (book.description) {
+    description.textContent = book.description;
+  }
+
+  dialog.showModal();
+};
+
+// Handle dialog close
+document.getElementById(`close-dialog`).addEventListener(`click`, () => {
+  document.getElementById(`books-dialog`).close();
+});
 
 const searchForm = document.getElementById(`book-form`);
 searchForm.addEventListener(`submit`, e => {
