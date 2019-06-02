@@ -1,4 +1,5 @@
 const request = require(`request`);
+const parseResponse = require(`./parse-response`);
 
 const books = (search, callback) => {
   const searchTerm = encodeURIComponent(search);
@@ -11,9 +12,11 @@ const books = (search, callback) => {
         `No volumes found! Please change your search terms and try again.`
       );
     } else {
-      callback(body.items);
+      callback(parseResponse(body.items));
     }
   });
 };
 
-books(`skjvbhr784hfwiurf`, console.log);
+books(`the basic eight`, console.log);
+
+module.exports = books;
