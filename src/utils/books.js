@@ -12,11 +12,9 @@ const books = (search, callback) => {
         `No volumes found! Please change your search terms and try again.`
       );
     } else {
-      callback(parseResponse(body.items));
+      callback(undefined, parseResponse(body.items));
     }
   });
 };
-
-books(`the basic eight`, console.log);
 
 module.exports = books;
