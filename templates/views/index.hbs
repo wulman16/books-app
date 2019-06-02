@@ -12,16 +12,20 @@
 
 <body>
   {{>header}}
-  <form id="book-form">
-    <input placeholder="Book Search">
-    <button>Search</button>
-  </form>
+  <div id="main-content">
+    <form id="book-form">
+      <input placeholder="Book Search">
+      <button>Search</button>
+    </form>
+  </div>
   <div id="book-results"></div>
   <dialog id="books-dialog">
-    <div id="title"></div>
-    <div id="authors"></div>
-    <div id="date"></div>
-    <div id="description"></div>
+    <div id="dialog-content">
+      <div id="title"></div>
+      <div id="authors"></div>
+      <div id="date"></div>
+      <div id="description"></div>
+    </div>
     <button id="close-dialog">Close</button>
   </dialog>
   {{>footer}}

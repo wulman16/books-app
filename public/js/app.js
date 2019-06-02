@@ -49,6 +49,7 @@ const handleDialog = book => {
   authors.textContent = ``;
   date.textContent = ``;
   date.textContent = ``;
+  description.textContent = ``;
 
   if (book.title) {
     title.textContent = book.title;
