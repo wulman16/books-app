@@ -106,3 +106,7 @@ button {
   color: white;
   border-radius: 5px;
 }
+
+#book-results {
+  margin-top: 16px;
+}
