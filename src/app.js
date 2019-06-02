@@ -16,6 +16,36 @@ hbs.registerPartials(partialsPath);
 
 app.use(express.static(publicDirectoryPath));
 
+app.get(``, (req, res) => {
+  res.render(`index`, {
+    title: `Books`,
+    name: `Will Ulman`
+  });
+});
+
+app.get(`/about`, (req, res) => {
+  res.render(`about`, {
+    title: `About`,
+    name: `Will Ulman`
+  });
+});
+
+app.get(`/books`, (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      error: `Search term must be provided!`
+    });
+  }
+
+  books(req.query.search, (error, data) => {
+    if (error) {
+      return res.send({ error });
+    }
+
+    res.send(data);
+  });
+});
+
 app.get(`*`, (req, res) => {
   res.render(`404`, {
     title: 404,
